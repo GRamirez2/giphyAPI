@@ -21,7 +21,7 @@ var foodButtons = ['pizza', 'hamburger', 'bacon', 'cheese', 'tacos', 'bbq', 'rib
 		var keyWord = $(this).attr('data-name');
 		var apiKey = "dc6zaTOxFJmzC";
 		// the API URL
-		var queryURL = 'http://api.giphy.com/v1/gifs/search?q='+keyWord+'&api_key='+apiKey;
+		var queryURL = 'http://api.giphy.com/v1/gifs/search?q='+keyWord+'&limit=4&rating=pg&api_key='+apiKey;
 
 		// ajax hits ths gify API
 		$.ajax({url: queryURL, method: 'GET'}).done(function(results) {
@@ -31,22 +31,21 @@ var foodButtons = ['pizza', 'hamburger', 'bacon', 'cheese', 'tacos', 'bbq', 'rib
 			for (var i = 0; i < results.data.length; i++){
 				
 				// Creating a div for all the info I need to display
-				var final = $('<div class= "panel panel-default searchBox"><div class="panel-body thumbnails">')
+				var final = $('<div class="thumbnails" style="display:inline;">')/*inline is not working??*/
 				// Getting the info I need from the results
 				var rating = results.data[i].rating
 				var ratingText = $('<p>').text("Rated: " + rating);
 				final.append(ratingText);
 
 				 /*still images at 200px*/
-				var img = $("<img>").attr('src',(results).data[i].images.fixed_width_still.url);/*still*/
-				var gig = $("<img>").attr('src',(results).data[i].images.fixed_width_downsampled.url)/*gif*/
-				final.append(img);
-			// console.log((results).data[i].images.fixed_width_still.url)
+				var still = $("<img>").attr('src',(results).data[i].images.fixed_width_still.url);/*still*/
+				/*gif images at 200px*/
+				var gif = $("<img>").attr('data-gif',(results).data[i].images.fixed_width_downsampled.url)/*gif*/
+				final.append(still, gif);
+				// console.log((results).data[i].images.fixed_width_still.url)
 				// pushing data into the approbriate ID
-				 // $(".gifs").prepend("Rated "+rating+"<br>"+img);
-				 
-
 				 $(".gifs").prepend(final);
+
 			};
 
 		});
