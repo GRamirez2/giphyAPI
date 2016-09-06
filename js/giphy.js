@@ -31,26 +31,36 @@ var foodButtons = ['pizza', 'hamburger', 'bacon', 'cheese', 'tacos', 'bbq', 'rib
 			for (var i = 0; i < results.data.length; i++){
 				
 				// Creating a div for all the info I need to display
-				var final = $('<div class="thumbnails" style="display:inline;">')/*inline is not working??*/
+				var final = $('<div class="thumbnails">')
 				// Getting the info I need from the results
 				var rating = results.data[i].rating
 				var ratingText = $('<p>').text("Rated: " + rating);
 				final.append(ratingText);
 
 				 /*still images at 200px*/
-				var still = $('<img class="image">').attr('src',(results).data[i].images.fixed_width_still.url);/*still*/
+				var still = results.data[i].images.fixed_width_still.url;/*still*/
 
 				// creating a data-still of the still image, I will have two still urls as attributes
-				var still2 = $('<img class="image">').attr('data-still', (results).data[i].images.fixed_width_still.url)
+				// var still2 = results.data[i].images.fixed_width_still.url;/*do I need this?*/
 
-				// this is a "flag" to use on the onclick to animate the still image
-				var state = $('<img class="image">').attr('data-motion', "false");
 				/*gif images at 200px*/
-				var gif = $('<img class="image">').attr('data-gif',(results).data[i].images.fixed_width_downsampled.url)/*gif*/
-				final.append(still, gif, state, still2);
+				var gif = results.data[i].images.fixed_width_downsampled.url/*gif*/
+
+
+				var image = $('<img>').attr({
+
+					'src':still,
+					'class':'image',
+					'data-motion': 'false',
+					'data-gif':gif,
+					'data-still':still
+				});
+				
+				final.append(image);
 				// console.log((results).data[i].images.fixed_width_still.url)
 				// pushing data into the approbriate ID
 				 $(".gifs").prepend(final);
+				 // var still2 = $('<img class="image">').attr('data-still',
 
 			};
 
@@ -84,17 +94,16 @@ function createButtons(){
 $(document).on('click', '.image', function(){
 
 var motion = $(this).attr('data-motion');
-var gifurl = $(this).attr('data-gif');/*this isn't working, no data*/
+// var gifurl = $(this).attr('data-gif');/*this isn't working, no data*/
 
 if (motion == 'false'){
 	$(this).attr('src', $(this).data('gif'));
 	$(this).attr('data-motion', 'true');
 }else{
-	$(this).attr('src', $(this).data('still2'));
+	$(this).attr('src', $(this).data('still'));
 	$(this).attr('data-motion', 'false');
 }
 console.log($(this).attr('data-motion'));/*this is working, giving me back false*/
-console.log(gifurl);/*This is giving me undefined*/
 console.log($(this).data('gif'));/*THis is also giving me undiefined*/
 
 });
