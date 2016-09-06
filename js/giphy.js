@@ -39,9 +39,11 @@ var foodButtons = ['pizza', 'hamburger', 'bacon', 'cheese', 'tacos', 'bbq', 'rib
 
 				 /*still images at 200px*/
 				var still = $("<img>").attr('src',(results).data[i].images.fixed_width_still.url);/*still*/
+				// this is a "flag" to use on the onclick to animate the still image
+				var state = $("<img>").attr('data-motion', "false");
 				/*gif images at 200px*/
 				var gif = $("<img>").attr('data-gif',(results).data[i].images.fixed_width_downsampled.url)/*gif*/
-				final.append(still, gif);
+				final.append(still, gif, state);
 				// console.log((results).data[i].images.fixed_width_still.url)
 				// pushing data into the approbriate ID
 				 $(".gifs").prepend(final);
@@ -73,7 +75,22 @@ function createButtons(){
 		    $('.buttonDiv').append(BTN);
 		}
 	}
+// ========================================================
 
+$(document).on('click', ".thumbnails", function(){
+
+var motion = $(this).attr('data-motion');
+
+if (motion == 'false'){
+	$(this).attr('src', $(this).data('gif'));
+	$(this).attr('data-motion', 'true');
+}else{
+	$(this).attr('src' /*, $(this).data('still')*/);
+	$(this).attr('data-motion', 'false');
+}
+
+
+});
 
 
 // ========================================================
