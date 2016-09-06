@@ -1,0 +1,32 @@
+/*.side{
+
+	-webkit-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+	position: absolute;
+	top:340px;
+	left:0px;
+	font-size: 24px;
+	background-color: lightblue;
+}*/
+
+/*.first{
+
+	background-color: green
+}
+
+.second{
+
+	background-color: red
+}*/
+
+.searchBox{
+
+	text-align: center;
+}
+
+.btn-success{
+
+	border-style: solid;
+	border-color: white;
+}
+
