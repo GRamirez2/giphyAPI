@@ -21,7 +21,7 @@ var foodButtons = ['pizza', 'hamburger', 'bacon', 'cheese', 'tacos', 'bbq', 'rib
 		var keyWord = $(this).attr('data-name');
 		var apiKey = "dc6zaTOxFJmzC";
 		// the API URL
-		var queryURL = 'http://api.giphy.com/v1/gifs/search?q='+keyWord+'&limit=4&rating=pg&api_key='+apiKey;
+		var queryURL = 'https://api.giphy.com/v1/gifs/search?q='+keyWord+'&limit=4&rating=pg&api_key='+apiKey;
 
 		// ajax hits ths gify API
 		$.ajax({url: queryURL, method: 'GET'}).done(function(results) {
