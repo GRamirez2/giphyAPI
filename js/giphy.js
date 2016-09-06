@@ -6,7 +6,7 @@
 // user choice from input from
 var userChoice = $('#food-input').val().trim();
 var foodButtons = ['pizza', 'hamburger', 'bacon', 'cheese', 'tacos', 'bbq', 'ribs'];
-
+$(".gifHolder").hide();
 
 
 
@@ -16,7 +16,7 @@ var foodButtons = ['pizza', 'hamburger', 'bacon', 'cheese', 'tacos', 'bbq', 'rib
 // This function will trigger the AJAX Call
 	// $('#foodButton').on('click', function(){
 		function getmydata (){
-
+		$(".gifHolder").show();
 		//search based on button data-name
 		var keyWord = $(this).attr('data-name');
 		var apiKey = "dc6zaTOxFJmzC";
@@ -90,6 +90,16 @@ function createButtons(){
 		}
 	}
 // ========================================================
+// function clearInput (){
+			
+// 			$('#food-input').trigger('reset');
+
+			
+// 		};
+
+		// This doesn't work
+
+// ========================================================
 
 $(document).on('click', '.image', function(){
 
@@ -129,8 +139,13 @@ console.log($(this).data('gif'));/*THis is also giving me undiefined*/
 		// buttons are now created from the array with new word in the array
 		createButtons();
 
+		// clearInput();
+		// $('#food-input').trigger('reset');
+		
+		// newButton.empty();/*This is working either*/
+
 		// users can hit "enter" instead of clicking on ht button and it won't move to the next page
-		// return false;/*This isn't working*/
+		return false;/*This isn't working*/
 	});
 
 // ==========================================================
