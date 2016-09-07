@@ -21,7 +21,7 @@ $(".gifHolder").hide();
 		var keyWord = $(this).attr('data-name');
 		var apiKey = "dc6zaTOxFJmzC";
 		// the API URL
-		var queryURL = 'https://api.giphy.com/v1/gifs/search?q='+keyWord+'&limit=4&rating=pg&api_key='+apiKey;
+		var queryURL = 'https://api.giphy.com/v1/gifs/search?q='+keyWord+'&limit=6&rating=pg&api_key='+apiKey;
 
 		// ajax hits ths gify API
 		$.ajax({url: queryURL, method: 'GET'}).done(function(results) {
@@ -31,7 +31,7 @@ $(".gifHolder").hide();
 			for (var i = 0; i < results.data.length; i++){
 				
 				// Creating a div for all the info I need to display
-				var final = $('<div class="thumbnails">')
+				var final = $('<div class="thumbnails" style="float:left; margin-right:1em;">')
 				// Getting the info I need from the results
 				var rating = results.data[i].rating
 				var ratingText = $('<p>').text("Rated: " + rating);
@@ -39,9 +39,8 @@ $(".gifHolder").hide();
 
 				 /*still images at 200px*/
 				var still = results.data[i].images.fixed_width_still.url;/*still*/
-
+				
 				// creating a data-still of the still image, I will have two still urls as attributes
-				// var still2 = results.data[i].images.fixed_width_still.url;/*do I need this?*/
 
 				/*gif images at 200px*/
 				var gif = results.data[i].images.fixed_width_downsampled.url/*gif*/
@@ -77,7 +76,7 @@ function createButtons(){
 		// Loops through the array of foodButtons
 		for (var i = 0; i < foodButtons.length; i++){
 
-			// Then dynamicaly generates buttons for each movie in the array
+			// Then dynamicaly generates buttons for each food type in the array
 		    var BTN = $('<button type="button" class="btn btn-success" id="foodButton">')
 		    // add class
 		    BTN.addClass('foodType');
@@ -88,23 +87,16 @@ function createButtons(){
 		    // push the buttons to the correct div on the page
 		    $('.buttonDiv').append(BTN);
 		}
+
 	}
-// ========================================================
-// function clearInput (){
-			
-// 			$('#food-input').trigger('reset');
 
-			
-// 		};
-
-		// This doesn't work
 
 // ========================================================
 
 $(document).on('click', '.image', function(){
 
 var motion = $(this).attr('data-motion');
-// var gifurl = $(this).attr('data-gif');/*this isn't working, no data*/
+
 
 if (motion == 'false'){
 	$(this).attr('src', $(this).data('gif'));
@@ -127,7 +119,7 @@ console.log($(this).data('gif'));/*THis is also giving me undiefined*/
 // METHODS
 // ========================================================
 
-	// This function handles events where one button is clicked
+	// This function handles events where my big blue button is clicked
 	$('#addFood').on('click', function(){
 		
 		// This line of code will grab the input from the textbox
@@ -139,13 +131,11 @@ console.log($(this).data('gif'));/*THis is also giving me undiefined*/
 		// buttons are now created from the array with new word in the array
 		createButtons();
 
-		// clearInput();
-		// $('#food-input').trigger('reset');
-		
-		// newButton.empty();/*This is working either*/
+		// clearInput field;
+		$('#food-input').val('');
 
 		// users can hit "enter" instead of clicking on ht button and it won't move to the next page
-		return false;/*This isn't working*/
+		// return false;/*This isn't working*/
 	});
 
 // ==========================================================
