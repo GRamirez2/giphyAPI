@@ -34,7 +34,7 @@ $(".gifHolder").hide();
 				var final = $('<div class="thumbnails" style="float:left; margin-right:1em;">')
 				// Getting the info I need from the results
 				var rating = results.data[i].rating
-				var ratingText = $('<p>').text("Rated: " + rating);
+				var ratingText = $('<p>').text("gif rating = " + rating);
 				final.append(ratingText);
 
 				 /*still images at 200px*/
@@ -106,7 +106,7 @@ if (motion == 'false'){
 	$(this).attr('data-motion', 'false');
 }
 console.log($(this).attr('data-motion'));/*this is working, giving me back false*/
-console.log($(this).data('gif'));/*THis is also giving me undiefined*/
+
 
 });
 
@@ -134,8 +134,8 @@ console.log($(this).data('gif'));/*THis is also giving me undiefined*/
 		// clearInput field;
 		$('#food-input').val('');
 
-		// users can hit "enter" instead of clicking on ht button and it won't move to the next page
-		// return false;/*This isn't working*/
+		// users can hit "enter" instead of clicking on the button and it won't move to the next page
+		return false;/*This isn't working*/
 	});
 
 // ==========================================================
